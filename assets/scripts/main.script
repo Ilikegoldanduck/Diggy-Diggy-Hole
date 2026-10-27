@@ -1,3 +1,6 @@
+local player = require("assets.scripts.player")
+local player = require("assets.scripts.enemy")
+
 function init(self)
 	-- Add initialization code here
 	-- Learn more: https://defold.com/manuals/script/
