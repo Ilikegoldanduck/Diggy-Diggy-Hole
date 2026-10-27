@@ -9,14 +9,16 @@ local attack = {
         pp = -1,
         ppMax = -1,
         cd = 0,
-        cdTracker = 0
+        cdTracker = 0,
+        range = 1
     },
     {
         damage = 10,
         pp = 3,
         ppMax = 3,
         cd = 2,
-        cdTracker = 0
+        cdTracker = 0,
+        range = 5
     }
 }
 
