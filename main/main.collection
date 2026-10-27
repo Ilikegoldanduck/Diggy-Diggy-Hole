@@ -18,3 +18,11 @@ embedded_instances {
     y: 96.0
   }
 }
+embedded_instances {
+  id: "gui"
+  data: "components {\n"
+  "  id: \"main menu\"\n"
+  "  component: \"/assets/gui/main menu.gui\"\n"
+  "}\n"
+  ""
+}
