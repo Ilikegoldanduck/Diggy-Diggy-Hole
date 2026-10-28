@@ -23,6 +23,9 @@ local attack = {
 }
 
 local movement = 3
+local movesDone = 3
+
+local playerPos = {0, 0}
 
 function player.start()
     health = maxHealth
@@ -65,6 +68,10 @@ function player.attack(atk)
 end
 
 function player.newTurn()
+    movesDone = movesDone + 1 
+    if movesDone > movement then
+        movesDone = movement
+    end
     for i, v in ipairs(attack) do
         attack[atk].cdTracker = attack[atk].cdTracker + 1
     end

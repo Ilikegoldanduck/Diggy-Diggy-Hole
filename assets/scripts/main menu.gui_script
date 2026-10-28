@@ -25,6 +25,7 @@ function on_input(self, action_id, action)
 	if action_id == hash("space") or (action_id == hash("touch") and gui.pick_node(gui.get_node("start"), action.x, action.y)) then
 		closeMenu()
 		inMenu = false
+		msg.post("/main#main", "init")
 		msg.post(".", "release_input_focus")
 	end
 end
