@@ -1,10 +1,19 @@
 local player = require("assets.scripts.player")
 local enemy = require("assets.scripts.enemy")
+local map = require("assets.scripts.map")
 
 local chosenDirection = "left"
 
-function init(self)
+local level = {}
 
+function generateLevel()
+	map.generate()
+	pprint(map.getLevel())
+end
+
+function init(self)
+	map.initialize()
+	generateLevel()
 end
 
 function final(self)

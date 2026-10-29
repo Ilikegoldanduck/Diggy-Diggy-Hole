@@ -1,4 +1,4 @@
-tile_set: ""
+tile_set: "/assets/tilestuff/map.tilesource"
 layers {
   id: "layer1"
   z: 0.0
