@@ -24,10 +24,7 @@ function map.generate(x, y) -- starting position for player
     end
 
     for i = 0, math.random(5, 7), 1 do
-        local temptemp = level[0]
-        pprint(temptemp)
-        local i, v = math.random(0, #level), math.random(0, #temptemp)
-        pprint(i, v)
+        local i, v = math.random(0, #level), math.random(0, #(level[1]))
         if i == x and y == v then
             i = i - 1
         else
@@ -37,12 +34,11 @@ function map.generate(x, y) -- starting position for player
 
     local temp = true
     while temp do
-        local temptemp = level[0]
-        local i, v = math.random(0, #level), math.random(0, #temptemp)
-        pprint(i, v)
+        local i, v = math.random(0, #level), math.random(0, #(level[1]))
         if i ~= x or v ~= y then
             level[i][v] = 2
             temp = false
+            pprint(i, v)
         end
     end
 end
