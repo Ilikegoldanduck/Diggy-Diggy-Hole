@@ -3,9 +3,9 @@ local map = {}
 local level = {}
 
 function map.initialize()
-    for i = 0, 38, 1 do
+    for i = 0, 39, 1 do
         local temp = {}
-        for v = 0, 22, 1 do
+        for v = 0, 23, 1 do
             table.insert(temp, 0)
         end
         table.insert(level, temp)
@@ -15,11 +15,8 @@ end
 function map.generate(x, y) -- starting position for player
     for i, v in ipairs(level) do
         for j, k in ipairs(v) do
-            if i == x and y == j then
-                level[i][j] = 1
-            else
-                level[i][j] = math.random(0, 1)
-            end
+            level[i][j] = math.random(0, 1)
+            
         end
     end
 
@@ -41,6 +38,7 @@ function map.generate(x, y) -- starting position for player
             pprint(i, v)
         end
     end
+    level[x][y] = 1
 end
 
 function map.getLevel()
@@ -49,6 +47,10 @@ end
 
 function map.getTile(x, y)
     return level[x][y]
+end
+
+function map.destroyTile(x, y)
+    level[x][y] = 1
 end
 
 return map
