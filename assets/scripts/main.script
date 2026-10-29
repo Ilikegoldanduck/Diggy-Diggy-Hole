@@ -15,7 +15,7 @@ function generateLevel()
 	level = map.getLevel()
 
 	local x, y = 1, 1
-	timer.delay(.00005, true, function(self, handle)
+	timer.delay(.00001, true, function(self, handle)
 		j = level[x][y]
 		if j == 0 or j == 1 or j == 2 then
 			tilemap.set_tile("#level", "layer1", x, y, j + 1)
@@ -27,7 +27,6 @@ function generateLevel()
 		x = x + 1
 		if x > #level then
 			y = y + 1
-			pprint(y)
 			x = 1
 		end
 		if y == #level[1] then
@@ -77,36 +76,37 @@ function on_message(self, message_id, message, sender)
 	if message_id == hash("init") then
 		generateLevel()
 		msg.post(".", "acquire_input_focus")
+		pprint("hihi")
 	end
 end
 
 function on_input(self, action_id, action)
 	if action.pressed then
 		local x, y = 0, 0
-		if message_id == hash("up") then
+		if action_id == hash("up") then
 			chosenDirection = 1
-		elseif message_id == hash("down") then
+		elseif action_id == hash("down") then
 			chosenDirection = 3
-		elseif message_id == hash("left") then
+		elseif action_id == hash("left") then
 			chosenDirection = 4
-		elseif message_id == hash("right") then
+		elseif action_id == hash("right") then
 			chosenDirection = 2
 		else
-			if message_id == hash("space") then
+			if action_id == hash("space") then
 				player.doMove()
 				playerPos = {playerPos[1] + x. playerPos[2] + y}
-			elseif message_id == hash("primary") then
+			elseif action_id == hash("primary") then
 				player.doMove()
-			elseif message_id == hash("secondary") and player.getCD() == 0 then
+			elseif action_id == hash("secondary") and player.getCD() == 0 then
 				player.resetCD()
 				player.doMove()
 			end
-			if player.getMoves() == 0 or message_id == hash("skip") then
+			if player.getMoves() == 0 or action_id == hash("skip") then
 				enemiesTurn()
 				player.newTurn()
 			end
 		end
-		
+		pprint(chosenDirection)
 	end
 end
 
