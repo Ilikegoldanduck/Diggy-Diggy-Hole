@@ -49,7 +49,7 @@ function update(self, dt)
 			for k = -1, 1, 1 do
 				local x, y = playerPos[1] + i, playerPos[2] + k
 				if (x > 0 and x <= #level and y > 0 and y <= #level[1]) and tilemap.get_tile("#level", "layer1", x, y) ~= level[x][y] + 1 then
-					tilemap.set_tile("#level", "layer1", i, k, level[i][k] + 1)
+					tilemap.set_tile("#level", "layer1", x, y, level[x][y] + 1)
 				end
 			end
 		end
