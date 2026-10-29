@@ -38,12 +38,6 @@ function init(self)
 	map.initialize()
 end
 
-function final(self)
-	-- Add finalization code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
-end
-
 function update(self, dt)
 	-- Add update code here
 	-- Learn more: https://defold.com/manuals/script/
@@ -73,17 +67,25 @@ function on_message(self, message_id, message, sender)
 end
 
 function on_input(self, action_id, action)
-	if message_id == hash("up") and action.pressed then
-		chosenDirection = "up"
-	elseif message_id == hash("down") and action.pressed then
-		chosenDirection = "down"
-	elseif message_id == hash("left") and action.pressed then
-		chosenDirection = "left"
-	elseif message_id == hash("right") and action.pressed then
-		chosenDirection = "right"
-	end
-	if message_id == hash("space") and action.pressed then
-		
+	if action.pressed then
+		if message_id == hash("up") then
+			chosenDirection = "up"
+		elseif message_id == hash("down") then
+			chosenDirection = "down"
+		elseif message_id == hash("left") then
+			chosenDirection = "left"
+		elseif message_id == hash("right") then
+			chosenDirection = "right"
+		else
+			if message_id == hash("space") then
+				player.doMove()
+			elseif message_id == hash("primary") then
+				player.doMove()
+			elseif message_id == hash("secondary") and player.getCD() == 0 then
+				player.resetCD()
+				player.doMove()
+			end
+		end
 	end
 end
 

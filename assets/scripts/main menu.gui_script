@@ -1,3 +1,5 @@
+local player = require("assets.scripts.player")
+
 local inMenu = true
 
 function closeMenu()
@@ -10,9 +12,7 @@ function init(self)
 end
 
 function update(self, dt)
-	-- Add update code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
+	gui.set_text(gui.get_node("info"), "Health: " .. player.getHealth() .. " | Moves Left: " .. player.getMoves() .. " | Secondary CD: " .. player.getCD() )
 end
 
 function on_message(self, message_id, message, sender)

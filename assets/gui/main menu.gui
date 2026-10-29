@@ -1,4 +1,8 @@
 script: "/assets/scripts/main menu.gui_script"
+fonts {
+  name: "pixelSans"
+  font: "/assets/imgbin/pixelSans.font"
+}
 nodes {
   position {
     x: 320.0
@@ -124,6 +128,26 @@ nodes {
   layer: "layer"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 3.0
+    y: -10.0
+  }
+  scale {
+    x: 0.5
+    y: 0.5
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "Info:"
+  font: "pixelSans"
+  id: "info"
+  pivot: PIVOT_W
+  inherit_alpha: true
 }
 layers {
   name: "layer"

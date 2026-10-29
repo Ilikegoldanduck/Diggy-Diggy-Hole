@@ -16,7 +16,6 @@ function map.generate(x, y) -- starting position for player
     for i, v in ipairs(level) do
         for j, k in ipairs(v) do
             level[i][j] = math.random(0, 1)
-            
         end
     end
 
@@ -38,6 +37,7 @@ function map.generate(x, y) -- starting position for player
             pprint(i, v)
         end
     end
+    
     level[x][y] = 1
 end
 

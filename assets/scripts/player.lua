@@ -6,24 +6,20 @@ local maxHealth = 10
 local attack = {
     {
         damage = 3,
-        pp = -1,
-        ppMax = -1,
         cd = 0,
         cdTracker = 0,
         range = 1
     },
     {
         damage = 10,
-        pp = 3,
-        ppMax = 3,
         cd = 2,
         cdTracker = 0,
         range = 5
     }
 }
 
-local movement = 3
-local movesDone = 3
+local movement = 4
+local movesDone = 4
 
 local playerPos = {0, 0}
 
@@ -31,7 +27,6 @@ function player.start()
     health = maxHealth
     for i, v in ipairs(attack) do
         attack[i].cdTracker = 0
-        attack[i].pp = attack[i].ppMax
     end
 end
 
@@ -51,18 +46,13 @@ function player.getHealth()
 end
 
 function player.getAvailable(atk)
-    if attack[atk].pp == 0 then
-        return "pp"
-    elseif attack[atk].cdTracker < attack[atk].cd then
+    if attack[atk].cdTracker < attack[atk].cd then
         return "cd"
     end
     return "avail"
 end
 
 function player.attack(atk)
-    if attack[atk].pp > 0 then
-        attack[atk].pp = attack[atk].pp - 1
-    end
     attack[atk].cdTracker = 0
     return attack[atk].damage
 end
@@ -75,6 +65,22 @@ function player.newTurn()
     for i, v in ipairs(attack) do
         attack[atk].cdTracker = attack[atk].cdTracker + 1
     end
+end
+
+function player.doMove()
+    movesDone = movesDone - 1
+end
+
+function player.getMoves()
+    return movesDone
+end
+
+function player.getCD()
+    return attack[2].cd - attack[2].cdTracker
+end
+
+function player.resetCD()
+    attack[2].cdTracker = 0
 end
 
 return player
