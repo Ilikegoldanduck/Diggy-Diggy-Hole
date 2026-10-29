@@ -6,7 +6,7 @@ fonts {
 nodes {
   position {
     x: 320.0
-    y: 120.0
+    y: 145.0
   }
   size {
     x: 200.0
@@ -19,6 +19,9 @@ nodes {
   size_mode: SIZE_MODE_AUTO
 }
 nodes {
+  position {
+    y: 25.0
+  }
   size {
     x: 200.0
     y: 100.0
@@ -112,7 +115,7 @@ nodes {
 nodes {
   position {
     x: 320.0
-    y: 192.0
+    y: 217.0
   }
   size {
     x: 640.0
@@ -132,7 +135,7 @@ nodes {
 nodes {
   position {
     x: 3.0
-    y: -10.0
+    y: 15.0
   }
   scale {
     x: 0.5

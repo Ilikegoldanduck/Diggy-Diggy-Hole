@@ -28,6 +28,7 @@ embedded_instances {
   ""
   position {
     x: -1000.0
+    y: 25.0
   }
 }
 embedded_instances {
@@ -41,6 +42,9 @@ embedded_instances {
   "  component: \"/assets/tilestuff/level.tilemap\"\n"
   "}\n"
   ""
+  position {
+    y: 25.0
+  }
   scale3 {
     x: 2.0
     y: 2.0
@@ -69,4 +73,7 @@ embedded_instances {
   "  }\n"
   "}\n"
   ""
+  position {
+    y: 25.0
+  }
 }
