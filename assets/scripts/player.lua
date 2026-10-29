@@ -60,7 +60,7 @@ end
 function player.newTurn()
     movesDone = movement
     for i, v in ipairs(attack) do
-        attack[atk].cdTracker = attack[atk].cdTracker + 1
+        attack[i].cdTracker = attack[i].cdTracker + 1
     end
 end
 

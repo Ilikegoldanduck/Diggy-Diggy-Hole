@@ -37,7 +37,7 @@ function map.generate(x, y) -- starting position for player
             pprint(i, v)
         end
     end
-    
+
     level[x][y] = 1
 end
 
