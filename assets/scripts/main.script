@@ -6,6 +6,8 @@ local chosenDirection = "left"
 
 local level = {}
 
+local playerPos = {}
+
 function generateLevel()
 	map.generate()
 	pprint(map.getLevel())
