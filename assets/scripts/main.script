@@ -50,6 +50,9 @@ function on_input(self, action_id, action)
 	elseif message_id == hash("right") and action.pressed then
 		chosenDirection = "right"
 	end
+	if message_id == hash("space") and action.pressed then
+		
+	end
 end
 
 function on_reload(self)
