@@ -9,8 +9,25 @@ local level = {}
 local playerPos = {}
 
 function generateLevel()
-	map.generate()
-	pprint(map.getLevel())
+	map.generate(0, 0)
+	
+	level = map.getLevel()
+
+	for i, k in ipairs(level) do
+		for u, j in ipairs(k) do
+			if j == 0 or j == 1 or j == 2 then
+				if j == 2 then
+					pprint("hihihi!" .. i - 1 .. u)
+				end
+				tilemap.set_tile("#level", "layer1", i, u, j + 1)
+			elseif j == -1 then
+				tilemap.set_tile("#level", "layer1", i, u, 2)
+			elseif j == -2 then
+				tilemap.set_tile("#level", "layer1", i, u, 2)
+			end
+		end
+	end
+
 end
 
 function init(self)

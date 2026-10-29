@@ -1,9 +1,9 @@
 local map = {}
 
-local level = {{}}
+local level = {}
 
 function map.initialize()
-    for i = 0, 39, 1 do
+    for i = 0, 38, 1 do
         local temp = {}
         for v = 0, 22, 1 do
             table.insert(temp, 0)
@@ -24,7 +24,7 @@ function map.generate(x, y) -- starting position for player
     end
 
     for i = 0, math.random(5, 7), 1 do
-        local i, v = math.random(0, #level), math.random(0, #(level[1]))
+        local i, v = math.random(1, #level), math.random(1, #(level[1]))
         if i == x and y == v then
             i = i - 1
         else
@@ -34,7 +34,7 @@ function map.generate(x, y) -- starting position for player
 
     local temp = true
     while temp do
-        local i, v = math.random(0, #level), math.random(0, #(level[1]))
+        local i, v = math.random(1, #level), math.random(1, #(level[1]))
         if i ~= x or v ~= y then
             level[i][v] = 2
             temp = false
