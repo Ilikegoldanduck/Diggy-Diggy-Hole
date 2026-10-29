@@ -34,6 +34,10 @@ function generateLevel()
 	end)
 end
 
+function enemiesTurn()
+
+end
+
 function init(self)
 	map.initialize()
 end
@@ -84,6 +88,10 @@ function on_input(self, action_id, action)
 			elseif message_id == hash("secondary") and player.getCD() == 0 then
 				player.resetCD()
 				player.doMove()
+			end
+			if player.getMoves() == 0 or message_id == hash("skip") then
+				enemiesTurn()
+				player.newTurn()
 			end
 		end
 	end
