@@ -89,7 +89,7 @@ function on_message(self, message_id, message, sender)
 				while done do
 					local chosenDirection = math.random(1, 4)
 					local x, y = temppos[1] + (-1 * (2 - chosenDirection) * (chosenDirection % 2)), temppos[2] + (-1 * (chosenDirection - 3) * ((chosenDirection - 1) % 2))
-					if x >= 0 and x <= 40 and y >= 0 and y <= 24 then
+					if x > 0 and x <= 40 and y > 0 and y <= 24 then
 						if map.getTile(x, y) == 0 then
 							msg.post("/main#main", "break", {x, y})
 						else
