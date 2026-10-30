@@ -8,12 +8,12 @@ local chosenDirection = nil
 local moveCd = true
 
 local level = {}
+local levelCounter = 1
 
 local playerPos = {1, 1}
 
 local enemyTable = {}
 
-local gotFocus = false
 
 function checkEnemies(x, y, dmg)
 	for i, v in ipairs(enemyTable) do
@@ -34,7 +34,7 @@ function generateLevel()
 	enemyTable = {}
 	enemy.reset()
 
-	map.generate(1, 1)
+	map.generate(playerPos[1], playerPos[2])
 	
 	level = map.getLevel()
 
@@ -59,10 +59,18 @@ function generateLevel()
 				x = 1
 			end
 			if y > #level[1] then
+				msg.post(".", "acquire_input_focus")
 				timer.cancel(handle)
 			end
 		end
 	end)
+end
+
+function levelFin()
+	levelCounter = levelCounter + 1
+	msg.post(".", "release_input_focus")
+	chosenDirection = nil
+	generateLevel()
 end
 
 local inprog = true
@@ -73,11 +81,7 @@ function enemiesTurn()
 			msg.post(v, "turn", playerPos)
 			inprog = true
 			timer.delay(1, true, function(self, handle)
-				if not inprog then
-					if not gotFocus then
-						msg.post(".", "acquire_input_focus")
-						gotFocus = true
-					end
+				if not improg then
 					timer.cancel(handle)
 				end
 			end)
@@ -143,7 +147,7 @@ function on_input(self, action_id, action)
 		elseif moveCd and chosenDirection then
 			local x, y = playerPos[1] + (-1 * (2 - chosenDirection) * (chosenDirection % 2)), playerPos[2] + (-1 * (chosenDirection - 3) * ((chosenDirection - 1) % 2))
 			if x > 0 and x <= #level and y > 0 and y <= #level[1] then
-				if action_id == hash("space") and level[x][y] == 1 then
+				if action_id == hash("space") and (level[x][y] == 1 or level[x][y] == 2) then
 					moveCd = false
 					go.set_position(vmath.vector3((16 * x) - 16, (16 * y) + 9, 0), go.get_id("/player"))
 					playerPos = {x, y}
@@ -151,6 +155,9 @@ function on_input(self, action_id, action)
 					timer.delay(.25, false, function()
 						moveCd = true
 					end)
+					if level[x][y] == 2 then
+						levelFin()
+					end
 				elseif action_id == hash("primary") then
 					moveCd = false
 					if level[x][y] == 0 then
