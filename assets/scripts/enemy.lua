@@ -7,7 +7,7 @@ local enemyTypes = {
         health = 4,
         damage = 1,
         range = 1,
-        movement = 2
+        movement = 3
     },
     {
         health = 2,

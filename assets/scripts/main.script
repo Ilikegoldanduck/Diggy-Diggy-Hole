@@ -39,7 +39,7 @@ function generateLevel()
 	level = map.getLevel()
 
 	local x, y = 1, 1
-	timer.delay(--[[.000001]] 0, true, function(self, handle)
+	timer.delay(0, true, function(self, handle)
 		for i = 1, 4, 1 do
 			j = level[x][y]
 			if j == 0 or j == 1 or j == 2 then
@@ -129,6 +129,16 @@ end
 function on_message(self, message_id, message, sender)
 	if message_id == hash("init") then
 		generateLevel()
+	elseif message_id == hash("attack") then
+		player.damage(message[1])
+		if player.getHealth() <= 0 then
+			levelCounter = 1
+			generateLevel()
+		end
+	elseif message_id == hash("break") then
+		level[message[1]][message[2]] = 1
+		tilemap.set_tile("#level", "layer1", message[1], message[2], level[message[1]][message[2]] + 1)
+		map.destroyTile(message[1], message[2])
 	elseif message_id == hash("turnfin") then
 		inprog = false
 	end
