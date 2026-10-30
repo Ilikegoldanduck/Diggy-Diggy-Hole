@@ -80,4 +80,8 @@ function player.resetCD()
     attack[2].cdTracker = 0
 end
 
+function player.getRange(atk)
+    return attack[atk].range
+end
+
 return player
