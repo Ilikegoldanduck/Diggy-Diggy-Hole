@@ -21,7 +21,7 @@ function checkEnemies(x, y, dmg)
 end
 
 function generateLevel()
-
+	
 
 	map.generate(1, 1)
 	

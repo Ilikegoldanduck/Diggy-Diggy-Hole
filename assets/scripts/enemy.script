@@ -36,7 +36,16 @@ function fixed_update(self, dt)
 end
 
 function on_message(self, message_id, message, sender)
-	
+	if message_id == hash("turn") then
+		for i = 1, enemy.move(self.id), 1 do
+			
+		end
+	elseif message_id == hash("damage") then
+		if enemy.damage(self.id, message[1]) then
+			msg.post("/main#main", "died", {self.id})
+			go.delete()
+		end
+	end
 end
 
 function on_input(self, action_id, action)
