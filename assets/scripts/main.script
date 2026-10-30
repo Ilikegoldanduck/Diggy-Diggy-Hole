@@ -15,7 +15,7 @@ function generateLevel()
 	level = map.getLevel()
 
 	local x, y = 1, 1
-	timer.delay(.000001, true, function(self, handle)
+	timer.delay(--[[.000001]] 0, true, function(self, handle)
 		j = level[x][y]
 		if j == 0 or j == 1 or j == 2 then
 			tilemap.set_tile("#level", "layer1", x, y, j + 1)
@@ -110,9 +110,12 @@ function on_input(self, action_id, action)
 					player.resetCD()
 					for i = 1, player.getRange(2), 1 do
 						local x, y = playerPos[1] + (-1 * i * (2 - chosenDirection) * (chosenDirection % 2)), playerPos[2] + (-1 * i * (chosenDirection - 3) * ((chosenDirection - 1) % 2))
+						pprint(x, y)
 						if x > 0 and x <= #level and y > 0 and y <= #level[1] then
 							if level[x][y] == 0 then
+								level[x][y] = 1
 								map.destroyTile(x, y)
+								tilemap.set_tile("#level", "layer1", x, y, level[x][y] + 1)
 							end
 						end
 					end
