@@ -1,8 +1,6 @@
 local enemy = require("assets.scripts.enemy")
 
 go.property("id", 0)
-go.property("positionX", 1)
-go.property("positionY", 1)
 
 function init(self)
 
@@ -38,7 +36,7 @@ end
 function on_message(self, message_id, message, sender)
 	if message_id == hash("turn") then
 		for i = 1, enemy.move(self.id), 1 do
-			
+			local temppos = enemy.pos(self.id)
 		end
 	elseif message_id == hash("damage") then
 		if enemy.damage(self.id, message[1]) then

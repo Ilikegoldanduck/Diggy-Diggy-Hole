@@ -44,13 +44,14 @@ function generateLevel()
 			j = level[x][y]
 			if j == 0 or j == 1 or j == 2 then
 				tilemap.set_tile("#level", "layer1", x, y, j + 1)
-			elseif j == -1 then
+			elseif j == -1 then --High health Low Range
 				tilemap.set_tile("#level", "layer1", x, y, 2)
-				table.insert(enemyTable, factory.create("#enemyFactory", vmath.vector3(16 * x, 16 * y, 1), nil, {id = enemy.create(1, {x, y}), positionX = x, positionY = y}, 1))
+				table.insert(enemyTable, factory.create("#enemyFactory", vmath.vector3(16 * x, 16 * y, 1), nil, {id = enemy.create(1, {x, y})}, 1))
 				level[x][y] = 1
-			elseif j == -2 then
-				level[x][y] = 1
+			elseif j == -2 then --Low health High Range
 				tilemap.set_tile("#level", "layer1", x, y, 2)
+				table.insert(enemyTable, factory.create("#enemyFactory", vmath.vector3(16 * x, 16 * y, 1), nil, {id = enemy.create(2, {x, y})}, 1))
+				level[x][y] = 1
 			end
 			x = x + 1
 			if x > #level then
