@@ -28,10 +28,10 @@ function checkEnemiesCollision(x, y)
 	for i, v in ipairs(enemyTable) do
 		local temppos = enemy.pos(i)
 		if go.exists(v) and x == temppos[1] and y == temppos[2] then
-			return true
+			return false
 		end
 	end
-	return false
+	return true
 end
 
 function generateLevel()
@@ -167,7 +167,7 @@ function on_input(self, action_id, action)
 		elseif moveCd and chosenDirection then
 			local x, y = playerPos[1] + (-1 * (2 - chosenDirection) * (chosenDirection % 2)), playerPos[2] + (-1 * (chosenDirection - 3) * ((chosenDirection - 1) % 2))
 			if x > 0 and x <= #level and y > 0 and y <= #level[1] then
-				if action_id == hash("space") and (level[x][y] == 1 or level[x][y] == 2) and checkEnemyCollision(x, y) then
+				if action_id == hash("space") and (level[x][y] == 1 or level[x][y] == 2) and checkEnemiesCollision(x, y) then
 					moveCd = false
 					go.set_position(vmath.vector3((16 * x) - 16, (16 * y) + 9, 0), go.get_id("/player"))
 					playerPos = {x, y}
