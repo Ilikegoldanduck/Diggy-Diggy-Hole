@@ -42,6 +42,12 @@ embedded_instances {
   "  id: \"level\"\n"
   "  component: \"/assets/tilestuff/level.tilemap\"\n"
   "}\n"
+  "embedded_components {\n"
+  "  id: \"enemyFactory\"\n"
+  "  type: \"factory\"\n"
+  "  data: \"prototype: \\\"/assets/others/enemy.go\\\"\\n"
+  "\"\n"
+  "}\n"
   ""
   position {
     y: 25.0

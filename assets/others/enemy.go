@@ -1,3 +1,7 @@
+components {
+  id: "enemy"
+  component: "/assets/scripts/enemy.script"
+}
 embedded_components {
   id: "sprite"
   type: "sprite"

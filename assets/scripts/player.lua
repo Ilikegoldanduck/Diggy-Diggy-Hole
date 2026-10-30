@@ -53,7 +53,6 @@ function player.getAvailable(atk)
 end
 
 function player.attack(atk)
-    attack[atk].cdTracker = 0
     return attack[atk].damage
 end
 
