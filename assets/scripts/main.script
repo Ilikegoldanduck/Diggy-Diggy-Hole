@@ -13,6 +13,8 @@ local playerPos = {1, 1}
 
 local enemyTable = {}
 
+local gotFocus = false
+
 function checkEnemies(x, y, dmg)
 	for i, v in ipairs(enemyTable) do
 		local temppos = enemy.pos(i)
@@ -23,6 +25,14 @@ function checkEnemies(x, y, dmg)
 end
 
 function generateLevel()
+
+	for i, v in ipairs(enemyTable) do
+		if go.exists(v) then
+			go.delete(v)
+		end
+	end
+	enemyTable = {}
+	enemy.reset()
 
 	map.generate(1, 1)
 	
@@ -36,9 +46,10 @@ function generateLevel()
 				tilemap.set_tile("#level", "layer1", x, y, j + 1)
 			elseif j == -1 then
 				tilemap.set_tile("#level", "layer1", x, y, 2)
-				table.insert(enemyTable, factory.create("#enemyFactory", vmath.vector3(16 * x - 8, 16 * y + 16, 1), nil, {id = enemy.create(1, {x, y}), positionX = x, positionY = y}, 1))
+				table.insert(enemyTable, factory.create("#enemyFactory", vmath.vector3(16 * x, 16 * y, 1), nil, {id = enemy.create(1, {x, y}), positionX = x, positionY = y}, 1))
 				level[x][y] = 1
 			elseif j == -2 then
+				level[x][y] = 1
 				tilemap.set_tile("#level", "layer1", x, y, 2)
 			end
 			x = x + 1
@@ -46,8 +57,7 @@ function generateLevel()
 				y = y + 1
 				x = 1
 			end
-			if y == #level[1] then
-				msg.post(".", "acquire_input_focus")
+			if y > #level[1] then
 				timer.cancel(handle)
 			end
 		end
@@ -63,6 +73,10 @@ function enemiesTurn()
 			inprog = true
 			timer.delay(1, true, function(self, handle)
 				if not inprog then
+					if not gotFocus then
+						msg.post(".", "acquire_input_focus")
+						gotFocus = true
+					end
 					timer.cancel(handle)
 				end
 			end)

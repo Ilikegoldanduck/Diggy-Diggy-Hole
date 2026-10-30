@@ -12,4 +12,8 @@ embedded_components {
   "  texture: \"/builtins/graphics/particle_blob.tilesource\"\n"
   "}\n"
   ""
+  position {
+    x: -8.0
+    y: 16.0
+  }
 }
