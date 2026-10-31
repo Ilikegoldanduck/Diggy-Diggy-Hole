@@ -35,6 +35,8 @@ function checkEnemiesCollision(x, y)
 end
 
 function generateLevel()
+	playerPos = {1, 1}
+	go.set_position(vmath.vector3(0, 25, 0), go.get_id("/player"))
 
 	msg.post("/gui#main menu", "newLevel", {levelCounter})
 
