@@ -144,8 +144,9 @@ function on_message(self, message_id, message, sender)
 	elseif message_id == hash("attack") then
 		player.damage(message[1])
 		if player.getHealth() <= 0 then
+			msg.post(".", "release_input_focus")	
+			msg.post("/gui#main menu", "newGame", {levelCounter})
 			levelCounter = 1
-			generateLevel()
 		end
 	elseif message_id == hash("break") then
 		level[message[1]][message[2]] = 1

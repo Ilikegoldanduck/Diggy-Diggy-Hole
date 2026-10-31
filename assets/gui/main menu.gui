@@ -136,6 +136,7 @@ nodes {
   id: "info"
   pivot: PIVOT_W
   inherit_alpha: true
+  visible: false
 }
 nodes {
   position {
