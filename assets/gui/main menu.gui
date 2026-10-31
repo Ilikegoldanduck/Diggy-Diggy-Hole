@@ -212,6 +212,7 @@ nodes {
   id: "Game Over"
   layer: "layer1"
   inherit_alpha: true
+  visible: false
 }
 layers {
   name: "layer"

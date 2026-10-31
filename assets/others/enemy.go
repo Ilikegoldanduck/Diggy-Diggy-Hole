@@ -5,11 +5,11 @@ components {
 embedded_components {
   id: "sprite"
   type: "sprite"
-  data: "default_animation: \"anim\"\n"
+  data: "default_animation: \"monsters\"\n"
   "material: \"/builtins/materials/sprite.material\"\n"
   "textures {\n"
   "  sampler: \"texture_sampler\"\n"
-  "  texture: \"/builtins/graphics/particle_blob.tilesource\"\n"
+  "  texture: \"/assets/imgbin/sprites.tilesource\"\n"
   "}\n"
   ""
   position {
