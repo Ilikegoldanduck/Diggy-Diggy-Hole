@@ -5,6 +5,8 @@ local inMenu = true
 function closeMenu()
 	gui.set_visible(gui.get_node("Level"), false)
 	gui.set_visible(gui.get_node("backlayer"), false)
+	gui.set_visible(gui.get_node("logo"), false)
+	gui.set_visible(gui.get_node("instructions"), false)
 	gui.set_visible(gui.get_node("info"), true)
 end
 
@@ -20,7 +22,7 @@ function on_message(self, message_id, message, sender)
 	if message_id == hash("newLevel") then
 		gui.set_text(gui.get_node("Level"), "Level " .. tostring(message[1]))
 		gui.set_visible(gui.get_node("Level"), true)
-		timer.delay(1, false, function()
+		timer.delay(3, false, function()
 			gui.set_visible(gui.get_node("Level"), false)
 		end)
 	elseif message_id == hash("newGame") then

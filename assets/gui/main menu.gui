@@ -3,6 +3,10 @@ fonts {
   name: "pixelSans"
   font: "/assets/imgbin/pixelSans.font"
 }
+textures {
+  name: "icons and stuff"
+  texture: "/assets/imgbin/icons and stuff.atlas"
+}
 nodes {
   position {
     y: 25.0
@@ -155,6 +159,38 @@ nodes {
   layer: "layer1"
   inherit_alpha: true
   visible: false
+}
+nodes {
+  position {
+    x: 320.0
+    y: 325.0
+  }
+  scale {
+    x: 4.0
+    y: 4.0
+  }
+  type: TYPE_BOX
+  texture: "icons and stuff/icon"
+  id: "logo"
+  layer: "layer1"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 320.0
+    y: 100.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "[Press \'Space\' To Continue]"
+  font: "pixelSans"
+  id: "instructions"
+  layer: "layer1"
+  inherit_alpha: true
 }
 layers {
   name: "layer"

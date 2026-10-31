@@ -1,0 +1,7 @@
+images {
+  image: "/assets/imgbin/healing thing.png"
+}
+images {
+  image: "/assets/imgbin/icon.png"
+}
+extrude_borders: 2
