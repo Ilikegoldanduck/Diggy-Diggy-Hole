@@ -23,7 +23,7 @@ function on_message(self, message_id, message, sender)
 	if message_id == hash("newLevel") then
 		gui.set_text(gui.get_node("Level"), "Level " .. tostring(message[1]))
 		gui.set_visible(gui.get_node("Level"), true)
-		timer.delay(3, false, function()
+		timer.delay(4, false, function()
 			gui.set_visible(gui.get_node("Level"), false)
 		end)
 	elseif message_id == hash("newGame") then

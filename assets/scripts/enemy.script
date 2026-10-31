@@ -46,35 +46,39 @@ function on_message(self, message_id, message, sender)
 				msg.post("/main#main", "attack", {enemy.attack(self.id)})
 			elseif distance <= 20 then
 				if message[1] - temppos[1] == 0 then
-					if map.getTile(temppos[1], temppos[2] - ((temppos[2] - message[2]) / math.abs(message[2] - temppos[2]))) == 0 then
-						map.destroyTile(temppos[1], temppos[2] - ((temppos[2] - message[2]) / math.abs(message[2] - temppos[2])))
-						msg.post("/main#main", "break", {temppos[1], temppos[2] - ((temppos[2] - message[2]) / math.abs(message[2] - temppos[2]))})
-					else
-						enemy.changePos(self.id, {temppos[1], temppos[2] - ((temppos[2] - message[2]) / math.abs(message[2] - temppos[2]))})
-						go.set_position(vmath.vector3(16 * temppos[1], 16 * (temppos[2] - ((temppos[2] - message[2]) / math.abs(message[2] - temppos[2]))), 1))
-					end
-					if message[2] - temppos[2] < 0 then --Additions
-						go.set("#sprite", "cursor", ted)
-					else
-						go.set("#sprite", "cursor", .25 + ted)
+					if not enemy.checkPos(temppos[1], temppos[2] - ((temppos[2] - message[2]) / math.abs(message[2] - temppos[2]))) then
+						if map.getTile(temppos[1], temppos[2] - ((temppos[2] - message[2]) / math.abs(message[2] - temppos[2]))) == 0 then
+							map.destroyTile(temppos[1], temppos[2] - ((temppos[2] - message[2]) / math.abs(message[2] - temppos[2])))
+							msg.post("/main#main", "break", {temppos[1], temppos[2] - ((temppos[2] - message[2]) / math.abs(message[2] - temppos[2]))})
+						else
+							enemy.changePos(self.id, {temppos[1], temppos[2] - ((temppos[2] - message[2]) / math.abs(message[2] - temppos[2]))})
+							go.set_position(vmath.vector3(16 * temppos[1], 16 * (temppos[2] - ((temppos[2] - message[2]) / math.abs(message[2] - temppos[2]))), 1))
+						end
+						if message[2] - temppos[2] < 0 then --Additions
+							go.set("#sprite", "cursor", ted)
+						else
+							go.set("#sprite", "cursor", .25 + ted)
+						end
 					end
 				elseif message[2] - temppos[2] == 0 then
-					if map.getTile(temppos[1] - ((temppos[1] - message[1]) / math.abs(message[1] - temppos[1])), temppos[2]) == 0 then
-						map.destroyTile(temppos[1] - ((temppos[1] - message[1]) / math.abs(message[1] - temppos[1])), temppos[2])
-						msg.post("/main#main", "break", {temppos[1] - ((temppos[1] - message[1]) / math.abs(message[1] - temppos[1])), temppos[2]})
-					else
-						enemy.changePos(self.id, {temppos[1] - ((temppos[1] - message[1]) / math.abs(message[1] - temppos[1])), temppos[2]})
-						go.set_position(vmath.vector3(16 * (temppos[1] - ((temppos[1] - message[1]) / math.abs(message[1] - temppos[1]))), 16 * temppos[2], 1))
-					end
-					if message[1] - temppos[1] > 0 then --Additions
-						go.set("#sprite", "cursor", .125 + ted)
-					else
-						go.set("#sprite", "cursor", .375 + ted)
+					if not enemy.checkPos(temppos[1] - ((temppos[1] - message[1]) / math.abs(message[1] - temppos[1])), temppos[2]) then
+						if map.getTile(temppos[1] - ((temppos[1] - message[1]) / math.abs(message[1] - temppos[1])), temppos[2]) == 0 then
+							map.destroyTile(temppos[1] - ((temppos[1] - message[1]) / math.abs(message[1] - temppos[1])), temppos[2])
+							msg.post("/main#main", "break", {temppos[1] - ((temppos[1] - message[1]) / math.abs(message[1] - temppos[1])), temppos[2]})
+						else
+							enemy.changePos(self.id, {temppos[1] - ((temppos[1] - message[1]) / math.abs(message[1] - temppos[1])), temppos[2]})
+							go.set_position(vmath.vector3(16 * (temppos[1] - ((temppos[1] - message[1]) / math.abs(message[1] - temppos[1]))), 16 * temppos[2], 1))
+						end
+						if message[1] - temppos[1] > 0 then --Additions
+							go.set("#sprite", "cursor", .125 + ted)
+						else
+							go.set("#sprite", "cursor", .375 + ted)
+						end
 					end
 				else	
 					local x = temppos[1] - ((temppos[1] - message[1]) / math.abs(message[1] - temppos[1]))
 					local y = temppos[2] - ((temppos[2] - message[2]) / math.abs(message[2] - temppos[2]))
-					if map.getTile(x, temppos[2]) < map.getTile(temppos[1], y) then
+					if map.getTile(x, temppos[2]) < map.getTile(temppos[1], y) and not enemy.checkPos(temppos[1], y) then
 						enemy.changePos(self.id, {temppos[1], y})
 						go.set_position(vmath.vector3(16 * temppos[1], 16 * y, 1))
 						if message[1] - temppos[1] > 0 then --Additions
@@ -82,7 +86,7 @@ function on_message(self, message_id, message, sender)
 						else
 							go.set("#sprite", "cursor", .375 + ted)
 						end
-					elseif map.getTile(x, temppos[2]) > map.getTile(temppos[1], y) then
+					elseif map.getTile(x, temppos[2]) > map.getTile(temppos[1], y) and not enemy.checkPos(x, temppos[2]) then
 						enemy.changePos(self.id, {x, temppos[2]})
 						go.set_position(vmath.vector3(16 * x, 16 * temppos[2], 1))
 						if message[2] - temppos[2] < 0 then --Additions
@@ -91,7 +95,7 @@ function on_message(self, message_id, message, sender)
 							go.set("#sprite", "cursor", .25 + ted)
 						end
 					else
-						if x < y then
+						if x < y and not enemy.checkPos(temppos[1], y)  then
 							if map.getTile(temppos[1], y) == 0 then
 								map.destroyTile(temppos[1], y)
 								msg.post("/main#main", "break", {temppos[1], y})
@@ -104,7 +108,7 @@ function on_message(self, message_id, message, sender)
 							else
 								go.set("#sprite", "cursor", .375 + ted)
 							end
-						else
+						elseif not enemy.checkPos(x, temppos[2]) then
 							if map.getTile(x, temppos[2]) == 0 then
 								map.destroyTile(x, temppos[2])
 								msg.post("/main#main", "break", {x, temppos[2]})
@@ -122,10 +126,12 @@ function on_message(self, message_id, message, sender)
 				end
 			else
 				local done = true
-				while done do
+				local counter = 0
+				while done or counter < 3 do
 					local chosenDirection = math.random(1, 4)
+					counter = counter + 1
 					local x, y = temppos[1] + (-1 * (2 - chosenDirection) * (chosenDirection % 2)), temppos[2] + (-1 * (chosenDirection - 3) * ((chosenDirection - 1) % 2))
-					if x > 0 and x <= 40 and y > 0 and y <= 24 then
+					if x > 0 and x <= 40 and y > 0 and y <= 24 and not enemy.checkPos(x, y) then
 						if map.getTile(x, y) == 0 then
 							msg.post("/main#main", "break", {x, y})
 						else

@@ -69,4 +69,13 @@ function enemy.changePos(id, pos)
     enemyHandler[id].position = pos
 end
 
+function enemy.checkPos(x, y)
+    for i, v in ipairs(enemyHandler) do
+        if v.position[1] == x and v.position[2] == y then
+            return true
+        end
+    end
+    return false
+end
+
 return enemy
