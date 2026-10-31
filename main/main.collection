@@ -48,6 +48,12 @@ embedded_instances {
   "  data: \"prototype: \\\"/assets/others/enemy.go\\\"\\n"
   "\"\n"
   "}\n"
+  "embedded_components {\n"
+  "  id: \"healthFactory\"\n"
+  "  type: \"factory\"\n"
+  "  data: \"prototype: \\\"/assets/others/health.go\\\"\\n"
+  "\"\n"
+  "}\n"
   ""
   position {
     y: 25.0
