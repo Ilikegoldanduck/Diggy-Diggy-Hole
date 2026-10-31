@@ -23,6 +23,8 @@ local movesDone = 4
 
 local playerPos = {0, 0}
 
+local score = 0
+
 function player.start()
     health = maxHealth
     for i, v in ipairs(attack) do
@@ -83,6 +85,14 @@ end
 
 function player.getRange(atk)
     return attack[atk].range
+end
+
+function player.getScore()
+    return score
+end
+
+function player.increaseScore(x)
+    score = score + x
 end
 
 return player

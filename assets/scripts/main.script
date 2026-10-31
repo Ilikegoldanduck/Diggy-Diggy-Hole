@@ -36,6 +36,8 @@ end
 
 function generateLevel()
 
+	msg.post("/gui#main menu", "newLevel", {levelCounter})
+
 	for i, v in ipairs(enemyTable) do
 		if go.exists(v) then
 			go.delete(v)
