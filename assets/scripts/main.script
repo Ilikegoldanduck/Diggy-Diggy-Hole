@@ -46,6 +46,8 @@ end
 
 function generateLevel()
 
+	player.newTurn()
+
 	msg.post("/gui#main menu", "newLevel", {levelCounter})
 
 	for i, v in ipairs(enemyTable) do
