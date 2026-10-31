@@ -52,10 +52,6 @@ embedded_instances {
   position {
     y: 25.0
   }
-  scale3 {
-    x: 2.0
-    y: 2.0
-  }
 }
 embedded_instances {
   id: "player"
