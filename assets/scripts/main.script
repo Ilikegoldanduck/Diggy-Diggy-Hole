@@ -230,7 +230,7 @@ function on_input(self, action_id, action)
 					if level[x][y] == 0 then
 						level[x][y] = 1
 						map.destroyTile(x, y)
-						player.increaseScore(10)
+						player.increaseScore(25)
 					else
 						checkEnemies(x, y, player.attack(1))
 					end
@@ -243,7 +243,7 @@ function on_input(self, action_id, action)
 							if level[x][y] == 0 then
 								level[x][y] = 1
 								map.destroyTile(x, y)
-								player.increaseScore(10)
+								player.increaseScore(25)
 								tilemap.set_tile("#level", "layer1", x, y, level[x][y] + 1)
 							else
 								checkEnemies(x, y, player.attack(2))
