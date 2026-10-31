@@ -171,6 +171,11 @@ function on_message(self, message_id, message, sender)
 		if player.getHealth() <= 0 then
 			msg.post(".", "release_input_focus")	
 			msg.post("/gui#main menu", "newGame", {levelCounter})
+			for x = 1, #level, 1 do
+				for y = 1, #level[1], 1 do
+					tilemap.set_tile("#level", "layer1", x, y, 1)
+				end
+			end
 			levelCounter = 1
 			playerPos = {1, 1}
 			go.set_position(vmath.vector3(0, 25, 0), go.get_id("/player"))
@@ -196,11 +201,11 @@ end
 local inputTable = {hash("down"), hash("right"), hash("up"), hash("left")}
 
 function checkMovement(action_id)
-	for i, v in ipairs(inputTable)
+	for i, v in ipairs(inputTable) do
 		if v == action_id then
-			return true
 			go.set("/player#sprite", "cursor", .25 * (i - 1))
-			chosenDirection = i
+			chosenDirection = 5 - i
+			return true
 		end
 	end
 end
@@ -245,6 +250,7 @@ function on_input(self, action_id, action)
 							end
 						end
 					end
+				end
 				if player.getMoves() == 0 or action_id == hash("skip") then
 					enemiesTurn()
 				end
