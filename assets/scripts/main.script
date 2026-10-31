@@ -46,7 +46,7 @@ function generateLevel()
 	enemyTable = {}
 	enemy.reset()
 
-	map.generate(playerPos[1], playerPos[2])
+	map.generate(playerPos[1], playerPos[2], levelCounter)
 	
 	level = map.getLevel()
 
@@ -82,6 +82,7 @@ function levelFin()
 	levelCounter = levelCounter + 1
 	msg.post(".", "release_input_focus")
 	chosenDirection = nil
+	player.increaseScore(100)
 	generateLevel()
 end
 

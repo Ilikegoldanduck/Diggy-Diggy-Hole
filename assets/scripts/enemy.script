@@ -1,4 +1,5 @@
 local enemy = require("assets.scripts.enemy")
+local player = require("assets.scripts.player")
 local map = require("assets.scripts.map")
 
 go.property("id", 0)
@@ -105,6 +106,7 @@ function on_message(self, message_id, message, sender)
 	elseif message_id == hash("damage") then
 		if enemy.damage(self.id, message[1]) then
 			msg.post("/main#main", "died", {self.id})
+			player.increaseScore(50)
 			go.delete()
 		end
 	end

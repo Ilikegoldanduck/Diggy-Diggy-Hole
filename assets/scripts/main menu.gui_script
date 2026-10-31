@@ -30,6 +30,7 @@ function on_message(self, message_id, message, sender)
 		gui.set_visible(gui.get_node("backlayer"), true)
 		gui.set_visible(gui.get_node("Level"), true)
 		gui.set_text(gui.get_node("Level"), "Score: " .. tostring(player.getScore()) .. "\nLevel: " .. message[1])
+		player.resetScore()
 	end
 end
 

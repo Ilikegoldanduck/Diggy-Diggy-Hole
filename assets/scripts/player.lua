@@ -91,6 +91,10 @@ function player.getScore()
     return score
 end
 
+function player.resetScore()
+    score = 0
+end
+
 function player.increaseScore(x)
     score = score + x
 end
