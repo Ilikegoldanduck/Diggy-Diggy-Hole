@@ -35,8 +35,6 @@ function checkEnemiesCollision(x, y)
 end
 
 function generateLevel()
-	playerPos = {1, 1}
-	go.set_position(vmath.vector3(0, 25, 0), go.get_id("/player"))
 
 	msg.post("/gui#main menu", "newLevel", {levelCounter})
 
@@ -150,6 +148,8 @@ function on_message(self, message_id, message, sender)
 			msg.post(".", "release_input_focus")	
 			msg.post("/gui#main menu", "newGame", {levelCounter})
 			levelCounter = 1
+			playerPos = {1, 1}
+			go.set_position(vmath.vector3(0, 25, 0), go.get_id("/player"))
 		end
 	elseif message_id == hash("break") then
 		level[message[1]][message[2]] = 1
