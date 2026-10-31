@@ -179,16 +179,37 @@ nodes {
 nodes {
   position {
     x: 320.0
-    y: 100.0
+    y: 75.0
   }
   size {
     x: 200.0
     y: 100.0
   }
   type: TYPE_TEXT
-  text: "[Press \'Space\' To Continue]"
+  text: "[Press \'Space\' To Start]"
   font: "pixelSans"
   id: "instructions"
+  layer: "layer1"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 320.0
+    y: 325.0
+  }
+  scale {
+    x: 3.0
+    y: 3.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "Game Over\n"
+  ""
+  font: "pixelSans"
+  id: "Game Over"
   layer: "layer1"
   inherit_alpha: true
 }

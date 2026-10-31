@@ -7,6 +7,7 @@ function closeMenu()
 	gui.set_visible(gui.get_node("backlayer"), false)
 	gui.set_visible(gui.get_node("logo"), false)
 	gui.set_visible(gui.get_node("instructions"), false)
+	gui.set_visible(gui.get_node("Game Over"), false)
 	gui.set_visible(gui.get_node("info"), true)
 end
 
@@ -29,9 +30,12 @@ function on_message(self, message_id, message, sender)
 		msg.post(".", "acquire_input_focus")
 		inMenu = true
 		gui.set_visible(gui.get_node("info"), false)
+		gui.set_visible(gui.get_node("Game Over"), true)
+		gui.set_visible(gui.get_node("instructions"), true)
 		gui.set_visible(gui.get_node("backlayer"), true)
 		gui.set_visible(gui.get_node("Level"), true)
 		gui.set_text(gui.get_node("Level"), "Score: " .. tostring(player.getScore()) .. "\nLevel: " .. message[1])
+		gui.set_text(gui.get_node("instructions"), "[Press 'Space' to Restart]")
 		player.resetScore()
 	end
 end
