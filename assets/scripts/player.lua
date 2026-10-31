@@ -96,6 +96,11 @@ function player.resetScore()
 end
 
 function player.increaseScore(x)
+    if score % 250 + x > 250 then
+        for i = 1, math.floor((score % 250 + x) / 250), 1 do
+            player.heal(1)
+        end
+    end
     score = score + x
 end
 

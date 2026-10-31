@@ -4,12 +4,14 @@ local enemyHandler = {}
 
 local enemyTypes = {
     {
+        id = 1,
         health = 4,
         damage = 1,
         range = 1,
         movement = 3
     },
     {
+        id = 2,
         health = 2,
         damage = 2,
         range = 5,
@@ -19,6 +21,7 @@ local enemyTypes = {
 
 function enemy.create(type, pos)
     local temp = {
+        id = enemyTypes[type].id,
         health = enemyTypes[type].health,
         damage = enemyTypes[type].damage,
         range = enemyTypes[type].range,
@@ -52,6 +55,10 @@ end
 
 function enemy.range(id)
     return enemyHandler[id].range
+end
+
+function enemy.getid(i)
+    return enemyHandler[i].id
 end
 
 function enemy.pos(id)

@@ -82,7 +82,7 @@ function levelFin()
 	levelCounter = levelCounter + 1
 	msg.post(".", "release_input_focus")
 	chosenDirection = nil
-	player.increaseScore(100)
+	player.increaseScore(200)
 	generateLevel()
 end
 
