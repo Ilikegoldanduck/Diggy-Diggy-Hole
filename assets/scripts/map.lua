@@ -21,12 +21,23 @@ function map.generate(x, y, lvl) -- starting position for player
         end
     end
 
-    for i = 0, math.random(5, 7), 1 do
+    local multi = math.log(lvl, 8)
+
+    for i = 0, math.random(5 + multi, 7 + multi), 1 do
         local i, v = math.random(1, #level), math.random(1, #(level[1]))
-        if i == x and y == v then
+        if (i == x and y == v) or level[i][v] < 0 then
             i = i - 1
         else
             level[i][v] = math.random(-2, -1)
+        end
+    end
+
+    for i = 0, multi * 2, 1 do
+        local i, v = math.random(1, #level), math.random(1, #(level[1]))
+        if (i == x and y == v) or level[i][v] < 0 then
+            i = i - 1
+        else 
+            level[i][v] = -3
         end
     end
 
@@ -43,7 +54,7 @@ function map.generate(x, y, lvl) -- starting position for player
     for i, k in ipairs(level) do
         for o, l in ipairs(k) do
             if l == 1 and math.random(0, 29) == 0 then
-                level[i][o] = -3
+                level[i][o] = -4
             end
         end
     end
