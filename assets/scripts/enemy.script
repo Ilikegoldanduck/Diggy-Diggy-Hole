@@ -36,8 +36,13 @@ function fixed_update(self, dt)
 	-- Remove this function if not needed
 end
 
+local monsterNum = 3
+
 function move(self, start, stop)
-	local ted = (enemy.getid(self.id) - 1) * .5
+
+	local indexVal = monsterNum * 4
+	local ted = (enemy.getid(self.id) - 1) * (1 / monsterNum)
+
 	if not enemy.checkPos(stop[1], stop[2]) then
 		if map.getTile(stop[1], stop[2]) == 0 then
 			map.destroyTile(stop[1], stop[2])
@@ -49,11 +54,11 @@ function move(self, start, stop)
 		if stop[2] - start[2] < 0 then --Additions
 			go.set("#sprite", "cursor", ted)
 		elseif stop[2] - start[2] > 0 then
-			go.set("#sprite", "cursor", .25 + ted)
+			go.set("#sprite", "cursor", (2 / indexVal) + ted)
 		elseif stop[1] - start[1] > 0 then --Additions
-			go.set("#sprite", "cursor", .125 + ted)
+			go.set("#sprite", "cursor", (1 / indexVal) + ted)
 		else
-			go.set("#sprite", "cursor", .375 + ted)
+			go.set("#sprite", "cursor", (3 / indexVal) + ted)
 		end
 	end
 end
