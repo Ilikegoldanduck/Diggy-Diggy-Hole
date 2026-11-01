@@ -1,13 +1,43 @@
-# Welcome to Defold
+# Diggy Diggy Hole
 
-This project was created from the "empty" project template.
+Turn-based game where you descend down holes while enemies try killing you. Health packs are in the way, allowing you to heal up between interactions.
 
-The settings in ["game.project"](defold://open?path=/game.project) are all the default. A bootstrap empty ["main.collection"](defold://open?path=/main/main.collection) is included.
+Instructions/How to play:
+WASD to choose direction
+Space to move/start game
+Z is primary (short ranged attack)
+X is secondary (long ranged attack)
+C is skip (forfeit all remaining moves and offering the turn order to the enemies)
 
-Check out [the documentation pages](https://defold.com/learn) for examples, tutorials, manuals and API docs.
+Attack stats:
+- Primary:
+    - 1 Range
+    - 3 Damage
+- Secondary:
+    - 5 Range
+    - 10 Damage
+All attacks can break walls.
 
-If you run into trouble, help is available in [our forum](https://forum.defold.com).
+Monster Stats:
+- Zombie:
+    - 4 Health
+    - 1 Range
+    - 3 Moves
+    - 1 Damage
+- Skeleton:
+    - 2 Health
+    - 3 Range
+    - 1 Move
+    - 2 Damage
+Monsters will break walls to get to you.
 
-Happy Defolding!
+To collect health packs, you have to stand on their space. You heal 2 hp for every pack you pick up
+
+There is also score. Every 250 score you attain, you heal 1 hp.
+Score List:
+- Breaking Wall: 25 Score
+- Killing Zombies: 50 Score
+- Killing Skeletons: 100 Score
+- Finishing a level: 200 Score
 
 ---
