@@ -44,7 +44,7 @@ function move(self, start, stop)
 	local ted = (enemy.getid(self.id) - 1) * (1 / monsterNum)
 
 	if not enemy.checkPos(stop[1], stop[2]) then
-		if map.getTile(stop[1], stop[2]) == 0 then
+		if map.getTile(stop[1], stop[2]) == 0 and not enemy.getid(self.id) == 3 then
 			map.destroyTile(stop[1], stop[2])
 			msg.post("/main#main", "break", {stop[1], stop[2]})
 		else
@@ -71,7 +71,7 @@ function on_message(self, message_id, message, sender)
 			local distance = math.abs(message[1] - temppos[1]) + math.abs(message[2] - temppos[2])
 			if distance <= enemy.range(self.id) then
 				msg.post("/main#main", "attack", {enemy.attack(self.id)})
-			elseif distance <= 20 then
+			elseif distance <= 20 or enemy.getid(self.id) == 3 then
 				if message[1] - temppos[1] == 0 then
 					move(self, temppos, {temppos[1], temppos[2] - ((temppos[2] - message[2]) / math.abs(message[2] - temppos[2]))})
 				elseif message[2] - temppos[2] == 0 then
