@@ -16,6 +16,13 @@ local enemyTypes = {
         damage = 2,
         range = 5,
         movement = 1
+    },
+    {
+        id = 3, 
+        health = 11,
+        damage = 5,
+        range = 1,
+        movement = 2
     }
 }
 

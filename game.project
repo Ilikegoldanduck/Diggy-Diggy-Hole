@@ -20,7 +20,7 @@ scale = 0.01
 scale_mode = stretch
 
 [project]
-title = empty
+title = Diggy Diggy Hole
 
 [engine]
 run_while_iconified = 1
