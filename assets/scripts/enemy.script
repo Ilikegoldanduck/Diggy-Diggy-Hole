@@ -53,8 +53,7 @@ end
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash("turn") then
-		local temp = 1
-		timer.delay(.1, true, function(self, handle) 
+		for i = 1, enemy.move(self.id), 1 do
 			local temppos = enemy.pos(self.id)
 			local distance = math.abs(message[1] - temppos[1]) + math.abs(message[2] - temppos[2])
 			if distance <= enemy.range(self.id) then
@@ -92,12 +91,8 @@ function on_message(self, message_id, message, sender)
 					end
 				end
 			end	
-			if temp >= enemy.move(self.id) then
-				msg.post("/main#main", "turnfin")
-				timer.cancel(handle)
-			end
-			temp = temp + 1
-		end)
+		end
+		msg.post("/main#main", "turnfin")
 	elseif message_id == hash("damage") then
 		damage(self, message[1])
 	end
