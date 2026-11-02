@@ -5,7 +5,7 @@ collision_groups: "default"
 animations {
   id: "monsters"
   start_tile: 5
-  end_tile: 12
+  end_tile: 16
   playback: PLAYBACK_NONE
   fps: 0
 }

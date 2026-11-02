@@ -109,7 +109,11 @@ function on_message(self, message_id, message, sender)
 	elseif message_id == hash("damage") then
 		if enemy.damage(self.id, message[1]) then
 			msg.post("/main#main", "died", {self.id})
-			player.increaseScore(50 * enemy.getid(self.id))
+			if enemy.getid(self.id) == 3 then
+				player.increaseScore(500)
+			else
+				player.increaseScore(50 * enemy.getid(self.id))
+			end
 			go.delete()
 		end
 	end

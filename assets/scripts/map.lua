@@ -15,13 +15,18 @@ end
 function map.generate(x, y, lvl) -- starting position for player
     math.randomseed(lvl)
 
+    local multi = math.log(lvl, 8)
+
     for i, v in ipairs(level) do
         for j, k in ipairs(v) do
-            level[i][j] = math.random(0, 1)
+            if math.random() < (.5 * math.pow(1.95, -multi) + .5) then
+                level[i][j] = math.random(0, 1)
+            else
+                level[i][j] = math.random(3, 4)
+            end
         end
     end
 
-    local multi = math.log(lvl, 8)
 
     for i = 0, math.random(5 + multi, 7 + multi), 1 do
         local i, v = math.random(1, #level), math.random(1, #(level[1]))

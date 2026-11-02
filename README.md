@@ -29,6 +29,12 @@ Monster Stats:
     - 3 Range
     - 1 Move
     - 2 Damage
+- Ghost:
+    - 11 Health
+    - 1 Range
+    - 2 Move
+    - 5 Damage
+    - Ignore Walls
 Monsters will break walls to get to you.
 
 To collect health packs, you have to stand on their space. You heal 2 hp for every pack you pick up
@@ -38,6 +44,7 @@ Score List:
 - Breaking Wall: 25 Score
 - Killing Zombies: 50 Score
 - Killing Skeletons: 100 Score
+- Killing Ghosts: 500 Score
 - Finishing a level: 200 Score
 
 ---
