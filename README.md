@@ -47,11 +47,17 @@ Monster Stats:
     - 2 Move
     - 5 Damage
     - Ignores all obstacles
+- Blitz:
+    - 1 Health
+    - 1 Range
+    - 5 Move
+    - 4 Damage (dies after hitting)
+    - Ignores spikes
 Monsters will break walls to get to you if necessary.
 
 Monster spawning scales by level;
 Regular monsters (Zombies and Skeletons) go off ~ 6 + logbase10(level)
-Special monsters (Ghosts atm) go off logbase10(level)
+Special monsters (Ghosts and Blitzes) go off logbase10(level)
 
 To collect health packs, you have to stand on their space. You heal 2 hp for every pack you pick up
 
@@ -62,6 +68,7 @@ Score List:
 - Killing Zombies: 50 Score
 - Killing Skeletons: 100 Score
 - Killing Ghosts: 500 Score
+- Killing Blitzes: 150 Score
 - Finishing a level: 200 Score
 
 Tile List:

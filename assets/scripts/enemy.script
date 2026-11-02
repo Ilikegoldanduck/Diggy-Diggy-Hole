@@ -11,13 +11,15 @@ function init(self)
 	go.set("#sprite", "cursor", ted)
 end
 
-function damage(self, dmg)
+function damage(self, dmg, fromPlayer)
 	if enemy.damage(self.id, dmg) then
 		msg.post("/main#main", "died", {self.id})
-		if enemy.getid(self.id) == 3 then
-			player.increaseScore(500)
-		else
-			player.increaseScore(50 * enemy.getid(self.id))
+		if fromPlayer then
+			if enemy.getid(self.id) == 3 then
+				player.increaseScore(500)
+			else
+				player.increaseScore(50 * enemy.getid(self.id))
+			end
 		end
 		go.delete()
 	end
@@ -34,7 +36,7 @@ function move(self, start, stop)
 			msg.post("/main#main", "break", {stop[1], stop[2]})
 		else
 		if map.getTile(stop[1], stop[2]) == 3 and (enemy.getid(self.id) ~= 3 and enemy.getid(self.id) ~= 4) then
-				damage(self, 1)
+				damage(self, 1, false)
 			end
 			enemy.changePos(self.id, {stop[1], stop[2]})
 			go.set_position(vmath.vector3(16 * stop[1], 16 * stop[2], 1))
@@ -59,7 +61,7 @@ function on_message(self, message_id, message, sender)
 			if distance <= enemy.range(self.id) then
 				msg.post("/main#main", "attack", {enemy.attack(self.id)})
 				if enemy.getid(self.id) == 4 then
-					damage(self, 1)
+					damage(self, 1, false)
 				end
 			elseif distance <= 20 or enemy.getid(self.id) == 3 then
 				if message[1] - temppos[1] == 0 and (map.getTile(temppos[1], temppos[2] - ((temppos[2] - message[2]) / math.abs(message[2] - temppos[2]))) <= 2  or enemy.getid(self.id) == 3) then
@@ -97,6 +99,6 @@ function on_message(self, message_id, message, sender)
 		end
 		msg.post("/main#main", "turnfin")
 	elseif message_id == hash("damage") then
-		damage(self, message[1])
+		damage(self, message[1], true)
 	end
 end
