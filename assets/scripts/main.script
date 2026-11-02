@@ -198,7 +198,7 @@ function on_input(self, action_id, action)
 	if action.pressed then
 		if checkMovement(action_id) then
 			
-		elseif moveCd and chosenDirection then
+		elseif player.getMoves() > 0 and moveCd and chosenDirection then
 			local x, y = playerPos[1] + (-1 * (2 - chosenDirection) * (chosenDirection % 2)), playerPos[2] + (-1 * (chosenDirection - 3) * ((chosenDirection - 1) % 2))
 			if x > 0 and x <= #level and y > 0 and y <= #level[1] then
 				if action_id == hash("space") and (level[x][y] == 1 or level[x][y] == 2 or level[x][y] == 3) and checkEnemiesCollision(x, y) then
@@ -237,9 +237,11 @@ function on_input(self, action_id, action)
 						end
 					end
 				end
-				if player.getMoves() == 0 or action_id == hash("skip") then
-					enemiesTurn()
-				end
+				timer.delay(1, false, function() 				
+					if player.getMoves() == 0 or action_id == hash("skip") then
+						enemiesTurn()
+					end
+				end)
 			end
 		end
 	end

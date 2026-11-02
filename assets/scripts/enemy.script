@@ -66,6 +66,8 @@ function on_message(self, message_id, message, sender)
 				else	
 					local x = temppos[1] - ((temppos[1] - message[1]) / math.abs(message[1] - temppos[1]))
 					local y = temppos[2] - ((temppos[2] - message[2]) / math.abs(message[2] - temppos[2]))
+					pprint(map.getTile(temppos[1], y))
+					pprint(temppos)
 					if (map.getTile(temppos[1], y) <= 2 or enemy.getid(self.id) == 3) and map.getTile(x, temppos[2]) < map.getTile(temppos[1], y) and not enemy.checkPos(temppos[1], y) then
 						move(self, temppos, {temppos[1], y})
 					elseif (map.getTile(x, temppos[2]) <= 2 or enemy.getid(self.id) == 3) and map.getTile(x, temppos[2]) > map.getTile(temppos[1], y) and not enemy.checkPos(x, temppos[2]) then

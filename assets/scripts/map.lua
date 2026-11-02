@@ -72,7 +72,7 @@ function map.getLevel()
 end
 
 function map.getTile(x, y)
-    return level[x][y]
+    return level[x][y] or -10
 end
 
 function map.destroyTile(x, y)
