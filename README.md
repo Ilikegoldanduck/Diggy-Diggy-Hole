@@ -9,7 +9,17 @@ Z is primary (short ranged attack)
 X is secondary (long ranged attack)
 C is skip (forfeit all remaining moves and offering the turn order to the enemies)
 
-# All information:
+# Install Information:
+
+Play game in Itch (via website)
+
+or
+
+Download game from Releases
+Unzip folder
+Run .exe
+
+# Game information:
 
 Attack stats:
 - Primary:
@@ -37,7 +47,11 @@ Monster Stats:
     - 2 Move
     - 5 Damage
     - Ignores all obstacles
-Monsters will break walls to get to you.
+Monsters will break walls to get to you if necessary.
+
+Monster spawning scales by level;
+Regular monsters (Zombies and Skeletons) go off ~ 6 + logbase10(level)
+Special monsters (Ghosts atm) go off logbase10(level)
 
 To collect health packs, you have to stand on their space. You heal 2 hp for every pack you pick up
 

@@ -21,7 +21,7 @@ function damage(self, dmg)
 	end
 end
 
-local monsterNum = 3
+local monsterNum = 4
 
 function move(self, start, stop)
 

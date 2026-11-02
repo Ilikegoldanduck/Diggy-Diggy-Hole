@@ -58,7 +58,7 @@ function map.generate(x, y, lvl) -- starting position for player
     for i, k in ipairs(level) do
         for o, l in ipairs(k) do
             if l == 1 and math.random(0, 29) == 0 then
-                level[i][o] = -4
+                level[i][o] = -6
             end
         end
     end
