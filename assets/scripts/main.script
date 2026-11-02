@@ -8,7 +8,7 @@ local chosenDirection = nil
 local moveCd = true
 
 local level = {}
-local levelCounter = 1
+local levelCounter = 20
 
 local playerPos = {1, 1}
 
@@ -111,15 +111,15 @@ function enemiesTurn()
 	for i, v in ipairs(enemyTable) do
 		if go.exists(v) then
 			msg.post(v, "turn", playerPos)
-			inprog = true
-			timer.delay(1, true, function(self, handle)
-				if not improg then
-					timer.cancel(handle)
-				end
-			end)
 		end
 	end
-	player.newTurn()
+	inprog = true
+	timer.delay(1, true, function(self, handle)
+		if not improg then
+			player.newTurn()
+			timer.cancel(handle)
+		end
+	end)
 end
 
 function init(self)
@@ -243,10 +243,4 @@ function on_input(self, action_id, action)
 			end
 		end
 	end
-end
-
-function on_reload(self)
-	-- Add reload-handling code here
-	-- Learn more: https://defold.com/manuals/hot-reload/
-	-- Remove this function if not needed
 end
