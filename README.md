@@ -1,6 +1,6 @@
 # Diggy Diggy Hole
 
-Turn-based game where you descend down holes while enemies try killing you. Health packs are in the way, allowing you to heal up between interactions.
+A 2d game where you go lower and lower. The art style is meant to mimic a retro style game with simplistic movement that can be emulated on a console probably. 
 
 Instructions/How to play:
 WASD to choose direction
