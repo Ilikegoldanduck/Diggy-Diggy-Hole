@@ -105,7 +105,7 @@ function levelFin()
 	generateLevel()
 end
 
-local inprog = true
+local inprog = false
 
 function enemiesTurn()
 	for i, v in ipairs(enemyTable) do
@@ -195,7 +195,7 @@ function checkMovement(action_id)
 end
 
 function on_input(self, action_id, action)
-	if action.pressed then
+	if action.pressed and not inprog then
 		if checkMovement(action_id) then
 			
 		elseif player.getMoves() > 0 and moveCd and chosenDirection then
@@ -217,9 +217,8 @@ function on_input(self, action_id, action)
 						level[x][y] = 1
 						map.destroyTile(x, y)
 						player.increaseScore(25)
-					else
-						checkEnemies(x, y, player.attack(1))
 					end
+					checkEnemies(x, y, player.attack(1))
 				elseif action_id == hash("secondary") and player.getCD() == 0 then
 					doMove()
 					player.resetCD()
@@ -237,11 +236,9 @@ function on_input(self, action_id, action)
 						end
 					end
 				end
-				timer.delay(1, false, function() 				
-					if player.getMoves() == 0 or action_id == hash("skip") then
-						enemiesTurn()
-					end
-				end)
+				if player.getMoves() == 0 or action_id == hash("skip") then
+					enemiesTurn()
+				end
 			end
 		end
 	end

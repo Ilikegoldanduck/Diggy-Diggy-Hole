@@ -51,6 +51,7 @@ end
 function enemy.damage(id, x)
     enemyHandler[id].health = enemyHandler[id].health - x
     if enemyHandler[id].health <= 0 then
+        enemyHandler[id].position = {-1, -1}
         return true
     end
     return false
