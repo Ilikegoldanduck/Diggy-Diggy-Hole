@@ -71,7 +71,7 @@ function generateLevel()
 	timer.delay(0, true, function(self, handle)
 		for i = 1, 4, 1 do
 			j = level[x][y]
-			if j <= 0 then
+			if j >= 0 then
 				tilemap.set_tile("#level", "layer1", x, y, j + 1)
 			elseif j < 0 and j >= -3 then --Enemy spawner
 				tilemap.set_tile("#level", "layer1", x, y, 2)
@@ -141,21 +141,6 @@ function update(self, dt)
 			tilemap.set_tile("#level", "layer1", x, y, level[x][y] + 6)
 		end
 	end
-end
-
-function late_update(self, dt)
-	-- This function is called at the end of update cycle but before render
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
-end
-
-function fixed_update(self, dt)
-	-- This function is called if 'Fixed Update Frequency' is enabled in the Engine section of game.project
-	-- Can be coupled with fixed updates of the physics simulation if 'Use Fixed Timestep' is enabled in
-	-- Physics section of game.project
-	-- Add update code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
 end
 
 function hurt(damage)
