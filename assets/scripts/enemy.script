@@ -36,6 +36,18 @@ function fixed_update(self, dt)
 	-- Remove this function if not needed
 end
 
+function damage(dmg)
+	if enemy.damage(self.id, message[1]) then
+		msg.post("/main#main", "died", {self.id})
+		if enemy.getid(self.id) == 3 then
+			player.increaseScore(500)
+		else
+			player.increaseScore(50 * enemy.getid(self.id))
+		end
+		go.delete()
+	end
+end
+
 local monsterNum = 3
 
 function move(self, start, stop)
@@ -48,6 +60,9 @@ function move(self, start, stop)
 			map.destroyTile(stop[1], stop[2])
 			msg.post("/main#main", "break", {stop[1], stop[2]})
 		else
+			if map.getTile(stop[1], stop[2]) == 3 and enemy.getid(self.id) ~= 3 then
+				damage(1)
+			end
 			enemy.changePos(self.id, {stop[1], stop[2]})
 			go.set_position(vmath.vector3(16 * stop[1], 16 * stop[2], 1))
 		end
@@ -66,27 +81,26 @@ end
 function on_message(self, message_id, message, sender)
 	if message_id == hash("turn") then
 		local temppos = enemy.pos(self.id)
-		local ted = (enemy.getid(self.id) - 1) * .5
 		for i = 1, enemy.move(self.id), 1 do
 			local distance = math.abs(message[1] - temppos[1]) + math.abs(message[2] - temppos[2])
 			if distance <= enemy.range(self.id) then
 				msg.post("/main#main", "attack", {enemy.attack(self.id)})
 			elseif distance <= 20 or enemy.getid(self.id) == 3 then
-				if message[1] - temppos[1] == 0 then
+				if message[1] - temppos[1] == 0 and (map.getTile(temppos[1], temppos[2] - ((temppos[2] - message[2]) / math.abs(message[2] - temppos[2]))) <= 2  or enemy.getid(self.id) == 3) then
 					move(self, temppos, {temppos[1], temppos[2] - ((temppos[2] - message[2]) / math.abs(message[2] - temppos[2]))})
-				elseif message[2] - temppos[2] == 0 then
+				elseif message[2] - temppos[2] == 0 and (map.getTile(temppos[1] - ((temppos[1] - message[1]) / math.abs(message[1] - temppos[1])), temppos[2]) <= 2 or enemy.getid(self.id) == 3) then
 					move(self, temppos, {temppos[1] - ((temppos[1] - message[1]) / math.abs(message[1] - temppos[1])), temppos[2]})
 				else	
 					local x = temppos[1] - ((temppos[1] - message[1]) / math.abs(message[1] - temppos[1]))
 					local y = temppos[2] - ((temppos[2] - message[2]) / math.abs(message[2] - temppos[2]))
-					if map.getTile(x, temppos[2]) < map.getTile(temppos[1], y) and not enemy.checkPos(temppos[1], y) then
+					if (map.getTile(temppos[1], y) <= 2 or enemy.getid(self.id) == 3) and map.getTile(x, temppos[2]) < map.getTile(temppos[1], y) and not enemy.checkPos(temppos[1], y) then
 						move(self, temppos, {temppos[1], y})
-					elseif map.getTile(x, temppos[2]) > map.getTile(temppos[1], y) and not enemy.checkPos(x, temppos[2]) then
+					elseif (map.getTile(x, temppos[2]) <= 2 or enemy.getid(self.id) == 3) and map.getTile(x, temppos[2]) > map.getTile(temppos[1], y) and not enemy.checkPos(x, temppos[2]) then
 						move(self, temppos, {x, temppos[2]})
 					else
-						if x < y then
+						if x < y and (map.getTile(temppos[1], y) ~= 4 or enemy.getid(self.id) == 3) then
 							move(self, temppos, {temppos[1], y})
-						else
+						elseif (map.getTile(x, temppos[2]) ~= 4 or enemy.getid(self.id) == 3) then
 							move(self, temppos, {x, temppos[2]})
 						end
 					end
@@ -98,7 +112,7 @@ function on_message(self, message_id, message, sender)
 					local chosenDirection = math.random(1, 4)
 					counter = counter + 1
 					local x, y = temppos[1] + (-1 * (2 - chosenDirection) * (chosenDirection % 2)), temppos[2] + (-1 * (chosenDirection - 3) * ((chosenDirection - 1) % 2))
-					if x > 0 and x <= 40 and y > 0 and y <= 24 and not enemy.checkPos(x, y) then
+					if x > 0 and x <= 40 and y > 0 and y <= 24 and not (enemy.checkPos(x, y) or (map.getTile(x, y) == 4 and enemy.getid(self.id) ~= 3)) then
 						move(self, temppos, {x, y})
 						done = false
 					end
@@ -107,15 +121,7 @@ function on_message(self, message_id, message, sender)
 		end		
 		msg.post("/main#main", "turnfin")
 	elseif message_id == hash("damage") then
-		if enemy.damage(self.id, message[1]) then
-			msg.post("/main#main", "died", {self.id})
-			if enemy.getid(self.id) == 3 then
-				player.increaseScore(500)
-			else
-				player.increaseScore(50 * enemy.getid(self.id))
-			end
-			go.delete()
-		end
+		damage(message[1])
 	end
 end
 
