@@ -75,6 +75,10 @@ function player.getMoves()
     return movesDone
 end
 
+function player.setMoves(moves)
+    movesDone = moves
+end
+
 function player.getCD()
     return attack[2].cd - attack[2].cdTracker
 end

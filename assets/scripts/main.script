@@ -111,9 +111,9 @@ function enemiesTurn()
 	for i, v in ipairs(enemyTable) do
 		if go.exists(v) then
 			msg.post(v, "turn", playerPos)
+			inprog = true
 		end
 	end
-	inprog = true
 	timer.delay(1, true, function(self, handle)
 		if not improg then
 			player.newTurn()
@@ -237,6 +237,7 @@ function on_input(self, action_id, action)
 					end
 				end
 				if player.getMoves() == 0 or action_id == hash("skip") then
+					player.setMoves(0)
 					enemiesTurn()
 				end
 			end
