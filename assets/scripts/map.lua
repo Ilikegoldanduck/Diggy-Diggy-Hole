@@ -76,7 +76,11 @@ function map.getTile(x, y)
 end
 
 function map.destroyTile(x, y)
-    level[x][y] = 1
+    if level[x][y] == 0 then
+        level[x][y] = 1
+    elseif level[x][y] == 4 then
+        level[x][y] = 3
+    end
 end
 
 return map

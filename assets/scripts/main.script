@@ -216,7 +216,11 @@ function on_input(self, action_id, action)
 					if level[x][y] == 0 then
 						level[x][y] = 1
 						map.destroyTile(x, y)
-						player.increaseScore(25)
+						player.increaseScore(20)
+					elseif level[x][y] == 4 then
+						level[x][y] = 3
+						map.destroyTile(x, y)
+						player.increaseScore(30)
 					end
 					checkEnemies(x, y, player.attack(1))
 				elseif action_id == hash("secondary") and player.getCD() == 0 then
