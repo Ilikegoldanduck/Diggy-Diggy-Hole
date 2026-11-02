@@ -4,8 +4,10 @@ local map = require("assets.scripts.map")
 
 go.property("id", 0)
 
-function init(self)
-	local ted = (enemy.getid(self.id) - 1) * .5
+local monsterNum = 4
+
+function init(self)	
+	local ted = (enemy.getid(self.id) - 1) * (1 / monsterNum)
 	go.set("#sprite", "cursor", ted)
 end
 
@@ -21,8 +23,6 @@ function damage(self, dmg)
 	end
 end
 
-local monsterNum = 4
-
 function move(self, start, stop)
 
 	local indexVal = monsterNum * 4
@@ -33,7 +33,7 @@ function move(self, start, stop)
 			map.destroyTile(stop[1], stop[2])
 			msg.post("/main#main", "break", {stop[1], stop[2]})
 		else
-			if map.getTile(stop[1], stop[2]) == 3 and enemy.getid(self.id) ~= 3 then
+		if map.getTile(stop[1], stop[2]) == 3 and (enemy.getid(self.id) ~= 3 and enemy.getid(self.id) ~= 4) then
 				damage(self, 1)
 			end
 			enemy.changePos(self.id, {stop[1], stop[2]})
@@ -58,6 +58,9 @@ function on_message(self, message_id, message, sender)
 			local distance = math.abs(message[1] - temppos[1]) + math.abs(message[2] - temppos[2])
 			if distance <= enemy.range(self.id) then
 				msg.post("/main#main", "attack", {enemy.attack(self.id)})
+				if enemy.getid(self.id) == 4 then
+					damage(self, 1)
+				end
 			elseif distance <= 20 or enemy.getid(self.id) == 3 then
 				if message[1] - temppos[1] == 0 and (map.getTile(temppos[1], temppos[2] - ((temppos[2] - message[2]) / math.abs(message[2] - temppos[2]))) <= 2  or enemy.getid(self.id) == 3) then
 					move(self, temppos, {temppos[1], temppos[2] - ((temppos[2] - message[2]) / math.abs(message[2] - temppos[2]))})

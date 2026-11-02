@@ -42,7 +42,7 @@ function map.generate(x, y, lvl) -- starting position for player
         if (i == x and y == v) or level[i][v] < 0 then
             i = i - 1
         else 
-            level[i][v] = -3
+            level[i][v] = math.random(-4, -3)
         end
     end
 
