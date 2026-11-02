@@ -52,7 +52,6 @@ function map.generate(x, y, lvl) -- starting position for player
         if i ~= x or v ~= y then
             level[i][v] = 2
             temp = false
-            pprint(i, v)
         end
     end
 
